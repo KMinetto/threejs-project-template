@@ -19,6 +19,10 @@ npm install
 npm run dev
 ```
 
+Link of the dev environment:
+
+- [dev environment](http://localhost:5173/)
+
 > Build the project
 
 ```bash
