@@ -1,12 +1,13 @@
 /**
  * Imports
  */
-import { Scene } from "three";
+import { Mesh, Scene } from "three";
 
 import Sizes from "./Essentials/Sizes/Sizes";
 import Camera from "./Essentials/Camera/Camera";
 import Renderer from "./Essentials/Renderer/Renderer";
 import Time from "./Utils/Time/Time";
+import World from "./World/World";
 
 // Instance
 let instance = null;
@@ -35,6 +36,7 @@ export default class Experience
         this.scene = new Scene();
         this.camera = new Camera();
         this.renderer = new Renderer();
+        this.world = new World();
 
         /** Sizez resize event */
         this.sizes.on('resize', () => {
@@ -63,6 +65,21 @@ export default class Experience
     {
         this.sizes.off('resize');
         this.time.off('tick');
+
+        // Traverse the whole scene
+        this.scene.traverse((child) => {
+            if (child instanceof Mesh) {
+                child.geometry.dispose();
+
+                for (const key in child.material) {
+                    const value = child.material[key];
+
+                    if (value && typeof value.dispose === "function") {
+                        value.dispose();
+                    }
+                }
+            }
+        })
 
         this.camera.controls.dispose();
         this.renderer.instance.dispose();
