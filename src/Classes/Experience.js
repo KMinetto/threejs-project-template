@@ -1,6 +1,11 @@
 /**
  * Imports
  */
+import { Scene } from "three";
+
+import Sizes from "./Essentials/Sizes/Sizes";
+import Camera from "./Essentials/Camera/Camera";
+import Renderer from "./Essentials/Renderer/Renderer";
 
 // Instance
 let instance = null;
@@ -8,7 +13,8 @@ let instance = null;
 /**
  * Class Experience
  */
-export default class Experience {
+export default class Experience
+{
 
     /** Experience constructor */
     constructor(canvas)
@@ -23,20 +29,26 @@ export default class Experience {
         this.canvas = canvas;
 
         // Setup
+        this.sizes = new Sizes();
+        this.scene = new Scene();
+        this.camera = new Camera();
+        this.renderer = new Renderer();
     }
-}
 
-resize()
-{
+    resize()
+    {
+        this.camera.resize();
+        this.renderer.resize();
+    }
 
-}
+    update()
+    {
+        this.camera.update();
+        this.renderer.upda();
+    }
 
-update()
-{
+    destroy()
+    {
 
-}
-
-destroy()
-{
-
+    }
 }
