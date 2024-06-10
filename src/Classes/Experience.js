@@ -9,6 +9,7 @@ import Renderer from "./Essentials/Renderer/Renderer";
 import Time from "./Utils/Time/Time";
 import World from "./World/World";
 import Resources from "./Utils/Resources/Resources";
+import Debug from "./Utils/Debug/Debug";
 
 import sources from "./World/sources";
 
@@ -34,6 +35,7 @@ export default class Experience
         this.canvas = canvas;
 
         // Setup
+        this.debug = new Debug();
         this.sizes = new Sizes();
         this.time = new Time();
         this.scene = new Scene();
@@ -88,5 +90,9 @@ export default class Experience
 
         this.camera.controls.dispose();
         this.renderer.instance.dispose();
+
+        if (this.debug.active) {
+            this.debug.ui.destroy();
+        }
     }
 }
