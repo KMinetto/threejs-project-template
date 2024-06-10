@@ -8,6 +8,9 @@ import Camera from "./Essentials/Camera/Camera";
 import Renderer from "./Essentials/Renderer/Renderer";
 import Time from "./Utils/Time/Time";
 import World from "./World/World";
+import Resources from "./Utils/Resources/Resources";
+
+import sources from "./World/sources";
 
 // Instance
 let instance = null;
@@ -34,6 +37,7 @@ export default class Experience
         this.sizes = new Sizes();
         this.time = new Time();
         this.scene = new Scene();
+        this.resources = new Resources(sources);
         this.camera = new Camera();
         this.renderer = new Renderer();
         this.world = new World();
@@ -58,6 +62,7 @@ export default class Experience
     update()
     {
         this.camera.update();
+        this.world.update();
         this.renderer.update();
     }
 
